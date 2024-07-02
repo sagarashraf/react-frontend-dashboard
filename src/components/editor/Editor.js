@@ -232,7 +232,7 @@ const Editor = () => {
       </Row>
       {imageSrc && (
         <>
-          <Row className="d-flex justify-content-center mb-5">
+          <Row className=" mx-lg-5 mb-5">
             <Col lg={4} md={6}>
               <Card className="rounded-0 text-center ">
                 <Card.Img
@@ -308,61 +308,58 @@ const Editor = () => {
                 <React.Fragment key={rowIndex}>
                   <Row xs={1} md={3}>
                     {row.map((item, index) => (
-                      <Col key={index}>
-                        <Card className="mx-3 rounded-0 mb-2 border-0">
-                          <Card.Body>
-                            {item.EditedImage ? (
-                              <div
-                                style={{
-                                  backgroundImage: `url(${item.EditedImage})`,
-                                  backgroundSize: "cover",
-                                  backgroundPosition: "center",
-                                  width: 350,
-                                  height: box2Height,
-                                }}
-                              ></div>
-                            ) : (
-                              <div
-                                className={item.disable && "disable-card"}
-                                style={{
-                                  backgroundColor: "gray",
-                                  backgroundImage: `url(${IMAGES[item.Image]})`,
-                                  backgroundSize: "cover",
-                                  backgroundPosition: "center",
-                                  width: box2Width,
-                                  height: box2Height,
-                                  position: "relative",
-                                  userSelect: "none",
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    borderRadius: "100PX",
-                                    marginTop: "138px",
-                                    marginLeft: "68px",
+                      <Col key={index} className="mx-auto">
+                        {item.EditedImage ? (
+                          <div
+                            style={{
+                              backgroundImage: `url(${item.EditedImage})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                              width: 350,
+                              height: box2Height,
+                            }}
+                          ></div>
+                        ) : (
+                          <div
+                            className={item.disable && "disable-card"}
+                            style={{
+                              backgroundColor: "gray",
+                              backgroundImage: `url(${IMAGES[item.Image]})`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                              width: box2Width,
+                              height: box2Height,
+                              position: "relative",
+                              userSelect: "none",
+                            }}
+                          >
+                            <div
+                              style={{
+                                borderRadius: "100PX",
+                                marginTop: "138px",
+                                marginLeft: "68px",
 
-                                    width: "260px",
-                                    height: "260px",
-                                    position: "absolute",
-                                  }}
-                                >
-                                  <Draggable
-                                    bounds="parent"
-                                    position={{ x: -70, y: -150 }}
-                                  >
-                                    <img
-                                      style={box2ImageStyle}
-                                      src={imageSrc}
-                                      alt="Img"
-                                      className="box"
-                                    />
-                                  </Draggable>
-                                </div>
-                              </div>
-                            )}
-                          </Card.Body>
-                        </Card>
-                        <div className="justify-content-center d-flex mx-3 mb-3">
+                                width: "260px",
+                                height: "260px",
+                                position: "absolute",
+                              }}
+                            >
+                              <Draggable
+                                bounds="parent"
+                                position={{ x: -70, y: -150 }}
+                              >
+                                <img
+                                  style={box2ImageStyle}
+                                  src={imageSrc}
+                                  alt="Img"
+                                  className="box"
+                                />
+                              </Draggable>
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="justify-content-center d-flex mt-3 px-5 mb-3">
                           <Button
                             className="w-50 mx-2"
                             variant="success"

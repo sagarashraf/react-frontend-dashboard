@@ -389,165 +389,158 @@ const Editor = () => {
 
                   {expandedCard && expandedCardRow === rowIndex && (
                     <Container>
-                      <Card bg="light" className="mt-3 expanded-card">
-                        <Card.Body>
-                          <Row key={`expanded-${rowIndex}`} className="mb-2">
-                            <Col xs={6}>
-                              <div
-                                id="divId"
-                                className="f-x"
-                                style={{
-                                  backgroundImage: `url(${
-                                    IMAGES[expandedCard.boundImage[imageIndex]]
-                                  })`,
-                                  backgroundSize: "cover",
-                                  backgroundPosition: "center",
-                                  width: box1Width,
-                                  height: box1Height,
-                                  position: "relative",
-                                }}
+                      <Row
+                        key={`expanded-${rowIndex}`}
+                        style={{ backgroundColor: "lightgray" }}
+                        className="mb-2 mt-3 p-lg-5  p-sm-2"
+                      >
+                        <Col xs={6}>
+                          <div
+                            id="divId"
+                            className="f-x"
+                            style={{
+                              backgroundImage: `url(${
+                                IMAGES[expandedCard.boundImage[imageIndex]]
+                              })`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                              width: box1Width,
+                              height: box1Height,
+                              position: "relative",
+                            }}
+                          >
+                            <div style={BOUNDS[expandedCard.bounds]}>
+                              <Draggable
+                                bounds="parent"
+                                onDrag={(e, ui) =>
+                                  handleDrag(e, ui, expandedCard.uniques)
+                                }
+                                position={expandedCard.position}
                               >
-                                <div style={BOUNDS[expandedCard.bounds]}>
-                                  <Draggable
-                                    bounds="parent"
-                                    onDrag={(e, ui) =>
-                                      handleDrag(e, ui, expandedCard.uniques)
+                                <img
+                                  style={box1ImageStyle}
+                                  src={imageSrc}
+                                  alt="badge"
+                                  className="box"
+                                />
+                              </Draggable>
+                            </div>
+                          </div>
+                        </Col>
+                        <Col lg={6} className="w-100">
+                          <Card className="h-100">
+                            <Card.Body>
+                              <Form.Label className="mt-0 h6">Range</Form.Label>
+                              <div className="text-center">
+                                <br />
+                                <Form.Range
+                                  id="width"
+                                  className="w-100 rounded-0"
+                                  min="1"
+                                  max="30"
+                                  step={1}
+                                  value={expandedCard.sliderValue}
+                                  onChange={(e) => handleSlider(e.target.value)}
+                                />
+                                <span className="pb-5">
+                                  {" "}
+                                  {Math.round(expandedCard.sliderValue / 0.3)}%
+                                </span>
+                              </div>
+
+                              <div className="mt-2">
+                                {expandedCard.ListImage && (
+                                  <div className="mb-3">
+                                    <Form.Label className="mt-0 h6">
+                                      Select Variation
+                                    </Form.Label>
+                                    <Form.Select
+                                      value={imageIndex}
+                                      onChange={(e) =>
+                                        setimageIndex(e.target.value)
+                                      }
+                                      aria-label="Default select example"
+                                    >
+                                      {expandedCard.ListImage?.map(
+                                        (image, index) => (
+                                          <option key={index} value={index}>
+                                            {image}
+                                          </option>
+                                        )
+                                      )}
+                                    </Form.Select>
+                                  </div>
+                                )}
+
+                                <h6>Center Design:</h6>
+                                <div className="d-flex justify-content-between">
+                                  <Button
+                                    onClick={() =>
+                                      updatePosition(
+                                        "verticall",
+                                        expandedCard.uniques
+                                      )
                                     }
-                                    position={expandedCard.position}
+                                    variant="dark"
+                                    className=" me-2 w-50 "
+                                    size="sm"
+                                    //   onClick={changeVerticle}
                                   >
                                     <img
-                                      style={box1ImageStyle}
-                                      src={imageSrc}
-                                      alt="badge"
-                                      className="box"
+                                      width={30}
+                                      height={30}
+                                      alt="aling"
+                                      src={ver}
+                                      className="mx-2"
                                     />
-                                  </Draggable>
+                                    Vertically
+                                  </Button>
+
+                                  <Button
+                                    onClick={() =>
+                                      updatePosition(
+                                        "horizontal",
+                                        expandedCard.uniques
+                                      )
+                                    }
+                                    variant="dark"
+                                    className="w-50"
+                                    size="sm"
+                                  >
+                                    <img
+                                      width={30}
+                                      height={30}
+                                      alt="aling"
+                                      src={hor}
+                                      className="mx-2"
+                                    />{" "}
+                                    Horizontally
+                                  </Button>
                                 </div>
                               </div>
-                            </Col>
-                            <Col lg={6}>
-                              <Card>
-                                <Card.Body>
-                                  <Form.Label className="mt-0 h6">
-                                    Range
-                                  </Form.Label>
-                                  <div className="text-center">
-                                    <br />
-                                    <Form.Range
-                                      id="width"
-                                      className="w-100 rounded-0"
-                                      min="1"
-                                      max="30"
-                                      step={1}
-                                      value={expandedCard.sliderValue}
-                                      onChange={(e) =>
-                                        handleSlider(e.target.value)
-                                      }
-                                    />
-                                    <span className="pb-5">
-                                      {" "}
-                                      {Math.round(
-                                        expandedCard.sliderValue / 0.3
-                                      )}
-                                      %
-                                    </span>
-                                  </div>
+                              <div className="text-center">
+                                <p className="uploader-info fw-bolder">
+                                  Print size: 2400×3200px
+                                </p>
+                              </div>
 
-                                  <div className="mt-2">
-                                    {expandedCard.ListImage && (
-                                      <div className="mb-3">
-                                        <Form.Label className="mt-0 h6">
-                                          Select Variation
-                                        </Form.Label>
-                                        <Form.Select
-                                          value={imageIndex}
-                                          onChange={(e) =>
-                                            setimageIndex(e.target.value)
-                                          }
-                                          aria-label="Default select example"
-                                        >
-                                          {expandedCard.ListImage?.map(
-                                            (image, index) => (
-                                              <option key={index} value={index}>
-                                                {image}
-                                              </option>
-                                            )
-                                          )}
-                                        </Form.Select>
-                                      </div>
-                                    )}
-
-                                    <h6>Center Design:</h6>
-                                    <div className="d-flex justify-content-between">
-                                      <Button
-                                        onClick={() =>
-                                          updatePosition(
-                                            "verticall",
-                                            expandedCard.uniques
-                                          )
-                                        }
-                                        variant="dark"
-                                        className=" me-2 w-50 "
-                                        size="sm"
-                                        //   onClick={changeVerticle}
-                                      >
-                                        <img
-                                          width={30}
-                                          height={30}
-                                          alt="aling"
-                                          src={ver}
-                                          className="mx-2"
-                                        />
-                                        Vertically
-                                      </Button>
-
-                                      <Button
-                                        onClick={() =>
-                                          updatePosition(
-                                            "horizontal",
-                                            expandedCard.uniques
-                                          )
-                                        }
-                                        variant="dark"
-                                        className="w-50"
-                                        size="sm"
-                                      >
-                                        <img
-                                          width={30}
-                                          height={30}
-                                          alt="aling"
-                                          src={hor}
-                                          className="mx-2"
-                                        />{" "}
-                                        Horizontally
-                                      </Button>
-                                    </div>
-                                  </div>
-                                  <div className="text-center">
-                                    <p className="uploader-info fw-bolder">
-                                      Print size: 2400×3200px
-                                    </p>
-                                  </div>
-
-                                  <div
-                                    className="w-100"
-                                    style={{ marginTop: "70px" }}
-                                  >
-                                    <Button
-                                      onClick={ApplyChnages}
-                                      variant="danger"
-                                      className="me-2 w-100 rounded-0"
-                                      size="sm"
-                                    >
-                                      Apply Changes
-                                    </Button>
-                                  </div>
-                                </Card.Body>
-                              </Card>
-                            </Col>
-                          </Row>
-                        </Card.Body>
-                      </Card>
+                              <div
+                                className="w-100"
+                                style={{ marginTop: "70px" }}
+                              >
+                                <Button
+                                  onClick={ApplyChnages}
+                                  variant="danger"
+                                  className="me-2 w-100 rounded-0"
+                                  size="sm"
+                                >
+                                  Apply Changes
+                                </Button>
+                              </div>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
                     </Container>
                   )}
                 </React.Fragment>

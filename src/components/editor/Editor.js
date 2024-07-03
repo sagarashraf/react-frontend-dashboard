@@ -53,7 +53,8 @@ const Editor = () => {
         "http://ec2-35-80-130-40.us-west-2.compute.amazonaws.com:5000/productsettings",
         {
           headers: {
-            Accept: "application/json, text/plain",
+            "Content-Type": "application/json",
+            Accept: "application/json",
           },
         }
       );

@@ -15,6 +15,7 @@ import { FiUpload } from "react-icons/fi";
 import { ProductList, IMAGES, BOUNDS } from "./editorConstant/EditorConstant";
 import hor from "./img/horizontal-align-center.png";
 import ver from "./img/vertical-align-center.webp";
+import axios from "axios";
 
 const Editor = () => {
   const [imageIndex, setimageIndex] = useState(0);
@@ -27,12 +28,16 @@ const Editor = () => {
   const [description, setDescription] = useState("");
   //Imgae Uploading Functions ///
   const [imageSrc, setImageSrc] = useState(null);
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
-    reader.onload = (event) => {
+
+    reader.onload = async (event) => {
+      // Mark the callback function as async
       setImageSrc(event.target.result);
-      setChunkedCardsList(ProductList(event.target.result));
+      let dataList = await fetchData(); // Use await here since it's inside an async function
+
+      setChunkedCardsList(ProductList(event.target.result, dataList));
     };
 
     if (file) {
@@ -41,6 +46,17 @@ const Editor = () => {
   };
   const handleButtonClick = () => {
     document.getElementById("fileInput").click();
+  };
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "http://ec2-35-80-130-40.us-west-2.compute.amazonaws.com:5000/productsettings"
+      );
+      console.log("API response:", response.data);
+      return await response.data;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
   //Imgae Uploading Functions /////Imgae Uploading Functions ///
 
@@ -173,7 +189,7 @@ const Editor = () => {
     if (emptyFields.length > 0) {
       alert(`Please fill in the following fields: ${emptyFields.join(", ")}`);
     } else {
-      console.log(chunkedCardsList);
+      console.log(obj);
     }
   };
 
@@ -427,7 +443,7 @@ const Editor = () => {
                             </div>
                           </div>
                         </Col>
-                        <Col lg={6} className="w-100">
+                        <Col lg={6} className="">
                           <Card className="h-100">
                             <Card.Body>
                               <Form.Label className="mt-0 h6">Range</Form.Label>

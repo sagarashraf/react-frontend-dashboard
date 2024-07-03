@@ -18,41 +18,27 @@ import toteBag from "./ToteBag.png";
 import whiteHoodie from "./WhiteHoodie.png";
 import tshirtBlack from "./TShirtBlack.png";
 import tshirt from "./TShirt.png";
+import teaCoasterRound from "./TeaCoasterRound.png";
 
 export const ArtistProducts = {
   BADGE: badge,
-
   BLACK_HOODIE: blackHoodie,
   WHITE_HOODIE: whiteHoodie,
-
   BOOK_MART: bookMart,
-
   CUSHIONS: cushions,
-
   ENVELOPS: envelopes,
-
   FRAME: frame,
   GOODY_BAG: goodyBag,
-
   GREETING_CARD: greetingCard,
-
   GYM_BOOTLE: gymBootle,
-
   KEY_CHAIN: keyChain,
-
   MUG: mug,
-
   NOTEBOOK: notebook,
-
   PHONE_CASE: phonCase,
-
   STICKER: sticker,
-
   TAG: tag,
-
   TEA_COASTER_SQUARE: teaCoasterSquare,
-
+  TEA_COASTER_ROUND: teaCoasterRound,
   TOTE_BAG: toteBag,
-
   TSHIRT: tshirt,
 };

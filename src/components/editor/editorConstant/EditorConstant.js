@@ -423,13 +423,13 @@ const IMAGES_LIST = [
   },
 ];
 
-export const ProductList = (file) => {
-  IMAGES_LIST.forEach((product) => {
+export const ProductList = (file, ProductList) => {
+  ProductList.forEach((product) => {
     product.ImageHover = file;
   });
   const chunkedCards = [];
-  for (let i = 0; i < IMAGES_LIST.length; i += 3) {
-    chunkedCards.push(IMAGES_LIST.slice(i, i + 3));
+  for (let i = 0; i < ProductList?.length; i += 3) {
+    chunkedCards.push(ProductList?.slice(i, i + 3));
   }
   return chunkedCards;
 };

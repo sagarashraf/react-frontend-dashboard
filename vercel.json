@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "http://ec2-35-80-130-40.us-west-2.compute.amazonaws.com:5000/$1"
-    }
-  ]
-}

@@ -50,14 +50,20 @@ const Editor = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        "http://ec2-35-80-130-40.us-west-2.compute.amazonaws.com:5000/productsettings"
+        "http://ec2-35-80-130-40.us-west-2.compute.amazonaws.com:5000/productsettings",
+        {
+          headers: {
+            Accept: "application/json, text/plain",
+          },
+        }
       );
       console.log("API response:", response.data);
-      return await response.data;
+      return response.data;
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  
   //Imgae Uploading Functions /////Imgae Uploading Functions ///
 
   /////
